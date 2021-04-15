@@ -11,7 +11,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int numOfUsers = -1;
+  int numOfUsers = 0;
   DBProvider _dbProvider;
 
 
@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 floatingActionButton: new FloatingActionButton(
                   backgroundColor: Colors.blueGrey[700],
                   onPressed: () {
-                    if (numOfUsers>=1)
+                    if (numOfUsers!= 0)
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => LoginPage()));
                     else
