@@ -27,6 +27,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("images/app_icon.png"),
+                  fit: BoxFit.cover
+              )
+            ),
             child: Scaffold(
                 backgroundColor: Colors.transparent,
                 appBar: AppBar(
@@ -47,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 floatingActionButton: new FloatingActionButton(
                   backgroundColor: Colors.blueGrey[700],
                   onPressed: () {
-                    if (numOfUsers == 1)
+                    if (numOfUsers>=1)
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => LoginPage()));
                     else

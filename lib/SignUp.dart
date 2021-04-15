@@ -32,7 +32,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
-        backgroundColor: Colors.grey[900],
+        backgroundColor: Colors.blueGrey[700],
         title: Text('Εγγραφή'),
       ),
       body: _signUpForm(),
