@@ -1,24 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import 'BathroomLights.dart';
-import 'BedroomLights.dart';
 import 'DatabaseSetUp/Database.dart';
 import 'HomePage.dart';
-import 'KitchenLights.dart';
-import 'LivingRoomLights.dart';
 import 'Model/User.dart';
 
-class UserMenu extends StatefulWidget {
-  final User user;
-  const UserMenu(this.user);
-
+class LivingRoomLights extends StatefulWidget {
   @override
-  _UserMenuState createState() => _UserMenuState();
+  _LivingRoomLights createState() => _LivingRoomLights();
 }
 
-class _UserMenuState extends State<UserMenu> {
+class _LivingRoomLights extends State< LivingRoomLights> {
   DBProvider _dbProvider;
 
 
@@ -35,64 +27,25 @@ class _UserMenuState extends State<UserMenu> {
     return Scaffold(
       backgroundColor: Colors.grey[800],
       appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          title: Row(mainAxisAlignment:MainAxisAlignment.start,children: [FaIcon(FontAwesomeIcons.home),Text('\t${widget.user.name}')],),
-
+        backgroundColor: Colors.transparent,
+        title: Text('Καθιστικό'),
       ),
       body: Center(
+        child: SingleChildScrollView(
         child: Column(
           children: [
             Card(
               child: InkWell(
                 splashColor: Colors.blue.withAlpha(30),
                 onTap:(){
-                  print('Living Room');
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=>LivingRoomLights()));
+                  print('TV');
                 },
                 child: Container(
                   width: 300,
                   height: 150,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage("images/livingRoom.png"),
-                          fit: BoxFit.scaleDown
-                      )
-                  ),
-              ),
-            ),
-          ),
-            Card(
-              child: InkWell(
-                splashColor: Colors.blue.withAlpha(30),
-                onTap:(){
-                  print('Bedroom');
-                  Navigator.push(context,MaterialPageRoute(builder: (context)=>BedRoomLights()));
-                },
-                child: Container(
-                  width: 300,
-                  height: 150,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage("images/bedRoom.png"),
-                          fit: BoxFit.scaleDown
-                      )
-                  ),
-              ),
-            ),
-            ),
-            Card(
-              child: InkWell(
-                splashColor: Colors.blue.withAlpha(30),
-                onTap:(){
-                  print('Bathroom');
-                 Navigator.push(context,MaterialPageRoute(builder: (context)=>BathRoomLights()));
-                },
-                child: Container(
-                  width: 300,
-                  height: 150,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage("images/bathRoom.png"),
+                          image: AssetImage("images/tv.png"),
                           fit: BoxFit.scaleDown
                       )
                   ),
@@ -103,15 +56,68 @@ class _UserMenuState extends State<UserMenu> {
               child: InkWell(
                 splashColor: Colors.blue.withAlpha(30),
                 onTap:(){
-                  print('Kitchen');
-                 Navigator.push(context,MaterialPageRoute(builder: (context)=>KitchenLights()));
+                  print('Home Cinema');
                 },
                 child: Container(
                   width: 300,
                   height: 150,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage("images/kitchen.png"),
+                          image: AssetImage("images/home_cinema.png"),
+                          fit: BoxFit.scaleDown
+                      )
+                  ),
+                ),
+              ),
+            ),
+            Card(
+              child: InkWell(
+                splashColor: Colors.blue.withAlpha(30),
+                onTap:(){
+                  print('Stereo');
+                },
+                child: Container(
+                  width: 300,
+                  height: 150,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage("images/stero.png"),
+                          fit: BoxFit.scaleDown
+                      )
+                  ),
+                ),
+              ),
+            ),
+            Card(
+              child: InkWell(
+                splashColor: Colors.blue.withAlpha(30),
+                onTap:(){
+                  print('Πορτατίφ');
+                },
+                child: Container(
+                  width: 300,
+                  height: 150,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage("images/protatif.png"),
+                          fit: BoxFit.scaleDown
+                      )
+                  ),
+                ),
+              ),
+            ),
+            Card(
+              child: InkWell(
+                splashColor: Colors.blue.withAlpha(30),
+                onTap:(){
+                  print('Κεντρικό φως');
+                },
+                child: Container(
+                  width: 300,
+                  height: 150,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage("images/light_on.jpg"),
                           fit: BoxFit.scaleDown
                       )
                   ),
@@ -121,6 +127,7 @@ class _UserMenuState extends State<UserMenu> {
           ],
         ),
         ),
+      ),
       bottomNavigationBar: BottomNavigationBar(
           unselectedItemColor: Colors.white,
           selectedItemColor: Colors.white,
@@ -163,7 +170,7 @@ class _UserMenuState extends State<UserMenu> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('- Για να ανάψεις κάποιο φως επέλεξε δωμάτιο'),
+                Text('- Για να ανάψεις κάποια επέλεξε την '),
                 Text('- Για να αποσυνδεθείς πάτα το κάτω δεξιά σύμβολο'),
               ],
             ),
