@@ -3,18 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'DatabaseSetUp/Database.dart';
 import 'HomePage.dart';
-import 'Model/User.dart';
 
-bool TvIsSwitched =false;
-bool PortatifIsSwitched=false;
 bool LampIsSwitched=false;
-class BedRoomLights extends StatefulWidget {
+class KitchenLights extends StatefulWidget {
   @override
-  _BedRoomLights createState() => _BedRoomLights();
+  _KitchenLights createState() => _KitchenLights();
 }
 
-class _BedRoomLights extends State<BedRoomLights> {
+class _KitchenLights extends State<KitchenLights> {
   DBProvider _dbProvider;
+
   @override
   void initState() {
     super.initState();
@@ -29,86 +27,12 @@ class _BedRoomLights extends State<BedRoomLights> {
       backgroundColor: Colors.grey[800],
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Text('Υπνοδωματιο'),
+        title: Text('Κουζίνα'),
       ),
       body: Center(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Card(
-                child: InkWell(
-                  splashColor: Colors.blue.withAlpha(30),
-                  onTap:(){
-                    print('TV');
-                  },
-                  child: Container(
-                    width: 300,
-                    height: 150,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage("images/tv.png"),
-                            fit: BoxFit.scaleDown
-                        )
-                    ),
-                  ),
-                ),
-              ),
-              Row(
-                children: [
-                  Text(
-                    '              Τηλεόραση               ',
-                    style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold),
-                  ),
-                  Switch(
-                    value: TvIsSwitched,
-                    onChanged: (value){
-                      setState(() {
-                        TvIsSwitched=value;
-                        print(TvIsSwitched);
-                      });
-                    },
-                    activeColor: Colors.orangeAccent,
-                    activeTrackColor: Colors.yellow,
-                  )
-                ],
-              ),
-              Card(
-                child: InkWell(
-                  splashColor: Colors.blue.withAlpha(30),
-                  onTap:(){
-                    print('Πορτατίφ');
-                  },
-                  child: Container(
-                    width: 300,
-                    height: 150,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage("images/protatif.png"),
-                            fit: BoxFit.scaleDown
-                        )
-                    ),
-                  ),
-                ),
-              ),
-              Row(
-                children: [
-                  Text(
-                    '              Πορτατίφ               ',
-                    style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold),
-                  ),
-                  Switch(
-                    value: PortatifIsSwitched,
-                    onChanged: (value){
-                      setState(() {
-                        PortatifIsSwitched=value;
-                        print(PortatifIsSwitched);
-                      });
-                    },
-                    activeColor: Colors.orangeAccent,
-                    activeTrackColor: Colors.yellow,
-                  )
-                ],
-              ),
               Card(
                 child: InkWell(
                   splashColor: Colors.blue.withAlpha(30),

@@ -40,6 +40,7 @@ class _UserMenuState extends State<UserMenu> {
 
       ),
       body: Center(
+      child:SingleChildScrollView(
         child: Column(
           children: [
             Card(
@@ -61,6 +62,10 @@ class _UserMenuState extends State<UserMenu> {
               ),
             ),
           ),
+            Text(
+              'Σαλόνι',
+              style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold),
+            ),
             Card(
               child: InkWell(
                 splashColor: Colors.blue.withAlpha(30),
@@ -79,6 +84,10 @@ class _UserMenuState extends State<UserMenu> {
                   ),
               ),
             ),
+            ),
+            Text(
+              'Υπνοδωμάτιο',
+              style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold),
             ),
             Card(
               child: InkWell(
@@ -99,6 +108,10 @@ class _UserMenuState extends State<UserMenu> {
                 ),
               ),
             ),
+            Text(
+              'Μπάνιο',
+              style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold),
+            ),
             Card(
               child: InkWell(
                 splashColor: Colors.blue.withAlpha(30),
@@ -118,9 +131,14 @@ class _UserMenuState extends State<UserMenu> {
                 ),
               ),
             ),
+            Text(
+              'Κουζίνα',
+              style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold),
+            ),
           ],
         ),
-        ),
+    ),
+      ),
       bottomNavigationBar: BottomNavigationBar(
           unselectedItemColor: Colors.white,
           selectedItemColor: Colors.white,

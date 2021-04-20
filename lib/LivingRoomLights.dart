@@ -5,6 +5,12 @@ import 'DatabaseSetUp/Database.dart';
 import 'HomePage.dart';
 import 'Model/User.dart';
 
+bool LampIsSwitched=false;
+bool TvIsSwitched=false;
+bool HCIsSwitched=false;
+bool StereoIsSwitched=false;
+bool PortatifIsSwitched=false;
+
 class LivingRoomLights extends StatefulWidget {
   @override
   _LivingRoomLights createState() => _LivingRoomLights();
@@ -12,7 +18,6 @@ class LivingRoomLights extends StatefulWidget {
 
 class _LivingRoomLights extends State< LivingRoomLights> {
   DBProvider _dbProvider;
-
 
   @override
   void initState() {
@@ -52,6 +57,25 @@ class _LivingRoomLights extends State< LivingRoomLights> {
                 ),
               ),
             ),
+            Row(
+              children: [
+                Text(
+                  '              Τηλεόραση               ',
+                  style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold),
+                ),
+                Switch(
+                  value: TvIsSwitched,
+                  onChanged: (value){
+                    setState(() {
+                      TvIsSwitched=value;
+                      print(TvIsSwitched);
+                    });
+                  },
+                  activeColor: Colors.orangeAccent,
+                  activeTrackColor: Colors.yellow,
+                )
+              ],
+            ),
             Card(
               child: InkWell(
                 splashColor: Colors.blue.withAlpha(30),
@@ -69,6 +93,25 @@ class _LivingRoomLights extends State< LivingRoomLights> {
                   ),
                 ),
               ),
+            ),
+            Row(
+              children: [
+                Text(
+                  '             Home Cinema            ',
+                  style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold),
+                ),
+                Switch(
+                  value: HCIsSwitched,
+                  onChanged: (value){
+                    setState(() {
+                      HCIsSwitched=value;
+                      print(HCIsSwitched);
+                    });
+                  },
+                  activeColor: Colors.orangeAccent,
+                  activeTrackColor: Colors.yellow,
+                )
+              ],
             ),
             Card(
               child: InkWell(
@@ -88,6 +131,25 @@ class _LivingRoomLights extends State< LivingRoomLights> {
                 ),
               ),
             ),
+            Row(
+              children: [
+                Text(
+                  '              Στερεοφωνικό           ',
+                  style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold),
+                ),
+                Switch(
+                  value: StereoIsSwitched,
+                  onChanged: (value){
+                    setState(() {
+                      StereoIsSwitched=value;
+                      print(StereoIsSwitched);
+                    });
+                  },
+                  activeColor: Colors.orangeAccent,
+                  activeTrackColor: Colors.yellow,
+                )
+              ],
+            ),
             Card(
               child: InkWell(
                 splashColor: Colors.blue.withAlpha(30),
@@ -106,6 +168,25 @@ class _LivingRoomLights extends State< LivingRoomLights> {
                 ),
               ),
             ),
+            Row(
+              children: [
+                Text(
+                  '               Πορτατίφ                     ',
+                  style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold),
+                ),
+                Switch(
+                  value: PortatifIsSwitched,
+                  onChanged: (value){
+                    setState(() {
+                      PortatifIsSwitched=value;
+                      print(PortatifIsSwitched);
+                    });
+                  },
+                  activeColor: Colors.orangeAccent,
+                  activeTrackColor: Colors.yellow,
+                )
+              ],
+            ),
             Card(
               child: InkWell(
                 splashColor: Colors.blue.withAlpha(30),
@@ -123,6 +204,25 @@ class _LivingRoomLights extends State< LivingRoomLights> {
                   ),
                 ),
               ),
+            ),
+            Row(
+              children: [
+                Text(
+                  '               Κεντρικό Φως               ',
+                  style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold),
+                ),
+                Switch(
+                  value: LampIsSwitched,
+                  onChanged: (value){
+                    setState(() {
+                      LampIsSwitched=value;
+                      print(LampIsSwitched);
+                    });
+                  },
+                  activeColor: Colors.orangeAccent,
+                  activeTrackColor: Colors.yellow,
+                )
+              ],
             ),
           ],
         ),

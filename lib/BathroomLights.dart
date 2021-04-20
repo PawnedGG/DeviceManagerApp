@@ -5,6 +5,7 @@ import 'DatabaseSetUp/Database.dart';
 import 'HomePage.dart';
 import 'Model/User.dart';
 
+bool LampIsSwitched=false;
 class BathRoomLights extends StatefulWidget {
   @override
   _BathRoomLights createState() => _BathRoomLights();
@@ -12,7 +13,6 @@ class BathRoomLights extends StatefulWidget {
 
 class _BathRoomLights extends State<BathRoomLights> {
   DBProvider _dbProvider;
-
 
   @override
   void initState() {
@@ -51,6 +51,25 @@ class _BathRoomLights extends State<BathRoomLights> {
                     ),
                   ),
                 ),
+              ),
+              Row(
+                children: [
+                  Text(
+                    '              Κεντρικό Φως        ',
+                    style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold),
+                  ),
+                  Switch(
+                    value: LampIsSwitched,
+                    onChanged: (value){
+                      setState(() {
+                        LampIsSwitched=value;
+                        print(LampIsSwitched);
+                      });
+                    },
+                    activeColor: Colors.orangeAccent,
+                    activeTrackColor: Colors.yellow,
+                  )
+                ],
               ),
             ],
           ),
