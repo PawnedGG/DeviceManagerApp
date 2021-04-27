@@ -149,15 +149,15 @@ class _UserMenuState extends State<UserMenu> {
             ),
           ],
           onTap: (val){
-            setState(() async {
+            setState((){
               _currentIndex = val;
               if(_currentIndex == 1){
-                String name;
-                name = await getText(context, "New room");
-                if(name!= null || name != ""){
-                  roomName.add(name);
-                  print(roomName.length);
-                }
+                getText(context, "Add room").then((name){
+                  if(name!= null && name != ""){
+                    roomName.add(name);
+                    print(roomName.length);
+                  }
+                });
               }
               if(_currentIndex == 3){
                 Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>MyHomePage()),(Route<dynamic> route)=>false);
@@ -186,9 +186,6 @@ class _UserMenuState extends State<UserMenu> {
                     cursorColor: Colors.white,
                     controller: myController,
                     autofocus: true,
-                    onChanged: (value){
-                      txt = value;
-                    },
                     decoration: new InputDecoration(
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(25.0)),
@@ -218,6 +215,7 @@ class _UserMenuState extends State<UserMenu> {
                 borderRadius: new BorderRadius.circular(30.0)
               ),
               onPressed: (){
+                myController.clear();
                 Navigator.of(context, rootNavigator: true).pop('dialog');
               },
                 child: const Text("Cancel")),
@@ -227,6 +225,8 @@ class _UserMenuState extends State<UserMenu> {
                     borderRadius: new BorderRadius.circular(30.0)
                 ),
                 onPressed: (){
+                  txt = myController.text;
+                  myController.clear();
                   ok = true;
                   Navigator.of(context, rootNavigator: true).pop(context);
                 },
@@ -234,7 +234,7 @@ class _UserMenuState extends State<UserMenu> {
           ],
         )
     );
-    if (!ok) return null;
+    if (!ok) return "";
     return txt;
   }
 }

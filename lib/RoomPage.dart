@@ -60,9 +60,38 @@ class _RoomPageState extends State<RoomPage>{
         child: ListView.builder(
           itemCount: deviceName.length,
           itemBuilder: (context, index){
-            return Padding(
-              padding: EdgeInsets.all(10),
-              child: GestureDetector(
+            return Dismissible(
+              key: UniqueKey(),
+                direction: DismissDirection.endToStart,
+                onDismissed: (_){
+                  setState(() {
+                    deviceName.removeAt(index);
+                    if(tapped.contains(index)){
+                      tapped.remove(index);
+                      }
+                  });
+                },
+              background: Padding(
+                padding: EdgeInsets.all(10),
+                child: Container(
+                  decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.all(Radius.circular(25))
+                  ),
+                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Icon(
+                      Icons.delete,
+                      color: Colors.white
+                    ),
+                  ),
+                ),
+              ),
+                child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: GestureDetector(
                       child: new Card(
                         color: tapped.contains(index) ? Colors.green : Colors.white,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
@@ -74,8 +103,8 @@ class _RoomPageState extends State<RoomPage>{
                           child: Text(
                             deviceName[index],
                             style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold
                             ),
                           ),
                         ),
@@ -83,17 +112,14 @@ class _RoomPageState extends State<RoomPage>{
                       onTap: (){
                         setState(() {
                           if(tapped.contains(index)){
-                            this.setState(() {
                               tapped.remove(index);
-                            });
                           }else{
-                            this.setState(() {
                               tapped.add(index);
-                            });
                           }
                         });
                       },
-              )
+                    )
+                )
             );
           },
         )
@@ -141,19 +167,19 @@ class _RoomPageState extends State<RoomPage>{
             ),
           ],
           onTap: (val){
-            setState(() async {
+            setState((){
               _currentIndex = val;
               if(_currentIndex == 0){
-                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>UserMenu(widget.user)),(Route<dynamic> route)=>false);
+                Navigator.pop(context);
               }
               if(_currentIndex == 1){
-                String name;
-                name = await getDevice(context, "New room");
-                if(name!= null || name != ""){
-                  deviceName.add(name);
-                  print(deviceName.length);
-                  setState(() {});
-                }
+                getDevice(context, "Add device").then((name){
+                  if(name!= null && name != ""){
+                    deviceName.add(name);
+                    print(deviceName.length);
+                    setState(() {});
+                  }
+                });
               }
               if(_currentIndex == 3){
                 Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>MyHomePage()),(Route<dynamic> route)=>false);
@@ -181,9 +207,6 @@ class _RoomPageState extends State<RoomPage>{
                     cursorColor: Colors.white,
                     controller: myController,
                     autofocus: true,
-                    onChanged: (value){
-                      txt = value;
-                    },
                     decoration: new InputDecoration(
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(25.0)),
@@ -214,6 +237,7 @@ class _RoomPageState extends State<RoomPage>{
                     borderRadius: new BorderRadius.circular(30.0)
                 ),
                 onPressed: (){
+                  myController.clear();
                   Navigator.of(context, rootNavigator: true).pop('dialog');
                 },
                 child: const Text("Cancel")),
@@ -225,13 +249,15 @@ class _RoomPageState extends State<RoomPage>{
                 ),
                 onPressed: (){
                   ok = true;
+                  txt = myController.text;
+                  myController.clear();
                   Navigator.of(context, rootNavigator: true).pop(context);
                 },
                 child: const Text("Ok"))
           ],
         )
     );
-    if (!ok) return null;
+    if (!ok) return "";
     return txt;
   }
 }
