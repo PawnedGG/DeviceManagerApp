@@ -76,7 +76,7 @@ class _UserMenuState extends State<UserMenu> {
               return Padding(
                 padding: EdgeInsets.all(10),
                   child: OpenContainer(
-                    openBuilder: (context, _)=> RoomPage(widget.user),
+                    openBuilder: (context, _)=> RoomPage(widget.user, roomName[index]),
                     closedShape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(40),
                     ),

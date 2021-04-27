@@ -8,7 +8,8 @@ import 'UserMenu.dart';
 
 class RoomPage extends StatefulWidget{
   final User user;
-  const RoomPage(this.user);
+  final String roomName;
+  const RoomPage(this.user, this.roomName);
 
   @override
   _RoomPageState createState() => _RoomPageState();
@@ -42,7 +43,7 @@ class _RoomPageState extends State<RoomPage>{
       backgroundColor: Colors.grey[800],
       appBar: AppBar(
         backgroundColor: Colors.grey[900],
-        title: Text("Room"),
+        title: Text(widget.roomName),
           /*Row(
             mainAxisAlignment:MainAxisAlignment.start,
             children: [
