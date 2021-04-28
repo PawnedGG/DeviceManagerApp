@@ -64,47 +64,75 @@ class _UserMenuState extends State<UserMenu> {
           )
       ),
       body: Center(
-        child: GridView.builder(
+        child: ListView.builder(
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             itemCount: roomName.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 15,
-              mainAxisSpacing: 4,
-              childAspectRatio: MediaQuery.of(context).size.width / (MediaQuery.of(context).size.height / 4)
-            ),
+            // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            //   crossAxisCount: 2,
+            //   crossAxisSpacing: 15,
+            //   mainAxisSpacing: 4,
+            //   childAspectRatio: MediaQuery.of(context).size.width / (MediaQuery.of(context).size.height / 4)
+            // ),
             itemBuilder: (context, index){
               return Padding(
-                padding: EdgeInsets.all(10),
-                  child: OpenContainer(
-                    openBuilder: (context, _)=> RoomPage(widget.user, roomName[index]),
-                    closedShape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(40),
-                    ),
-                    closedBuilder:(context, VoidCallback openContainer) =>
-                      GestureDetector(
-                        child: new Card(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-                          //margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                          //elevation: 5,
-                          child: new Container(
-                            alignment: Alignment.center,
-                            margin: new EdgeInsets.all(10),
-                            child: new Text(
-                              roomName[index],
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold
-                              ),
-                            ),
+                padding: EdgeInsets.symmetric(vertical: 10),
+                  child:ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(25)),
+                    child: Dismissible(
+                      resizeDuration: Duration(milliseconds: 50),
+                      movementDuration: Duration(milliseconds: 50),
+                      key: UniqueKey(),
+                      direction: DismissDirection.endToStart,
+                      onDismissed: (_){
+                        setState(() {
+                          roomName.removeAt(index);
+                        });
+                      },
+                      background: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          //borderRadius: BorderRadius.all(Radius.circular(25))
+                          ),
+                        //margin: EdgeInsets.symmetric(horizontal: 10),
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          child: Icon(
+                            Icons.delete,
+                            color: Colors.white
                           ),
                         ),
-                        onTap: (){
-                          openContainer();
-                        },
-                      )
-              ))
-              ;
+                      ),
 
+                      child: OpenContainer(
+                        openBuilder: (context, _)=> RoomPage(widget.user, roomName[index]),
+                        closedBuilder:(context, VoidCallback openContainer) =>
+                          GestureDetector(
+                            child: new Card(
+                              //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                              //margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                              //elevation: 5,
+                              child: new Container(
+                                height: 50,
+                                alignment: Alignment.center,
+                                margin: new EdgeInsets.all(10),
+                                child: new Text(
+                                  roomName[index],
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold
+                                    ),
+                                ),
+                              ),
+                            ),
+                            onTap: (){
+                              openContainer();
+                            },
+                          )
+                      ),
+                    )
+                  )
+              );
             },
         ),
       ),
@@ -156,11 +184,14 @@ class _UserMenuState extends State<UserMenu> {
                   if(name!= null && name != ""){
                     roomName.add(name);
                     print(roomName.length);
+                    setState(() {});
                   }
                 });
               }
               if(_currentIndex == 3){
-                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>MyHomePage()),(Route<dynamic> route)=>false);
+                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                    builder: (context)=>MyHomePage()),(Route<dynamic> route)=>false);
+                setState(() {});
               }
             });
           }

@@ -59,53 +59,58 @@ class _RoomPageState extends State<RoomPage>{
   _viewRoom()=>
       Center(
         child: ListView.builder(
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           itemCount: deviceName.length,
           itemBuilder: (context, index){
-            return Dismissible(
-              key: UniqueKey(),
-                direction: DismissDirection.endToStart,
-                onDismissed: (_){
-                  setState(() {
-                    deviceName.removeAt(index);
-                    if(tapped.contains(index)){
-                      tapped.remove(index);
+            return Padding(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(25)),
+                child: Dismissible(
+                  movementDuration: Duration(milliseconds: 50),
+                  resizeDuration: Duration(milliseconds: 50),
+                  key: UniqueKey(),
+                  direction: DismissDirection.endToStart,
+                  onDismissed: (_){
+                    setState(() {
+                      deviceName.removeAt(index);
+                      if(tapped.contains(index)){
+                        tapped.remove(index);
                       }
-                  });
-                },
-              background: Padding(
-                padding: EdgeInsets.all(10),
-                child: Container(
-                  decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.all(Radius.circular(25))
-                  ),
-                  margin: EdgeInsets.symmetric(horizontal: 10),
-                  alignment: Alignment.centerRight,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: Icon(
-                      Icons.delete,
-                      color: Colors.white
+                    });
+                  },
+                  background: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      //borderRadius: BorderRadius.all(Radius.circular(25))
                     ),
-                  ),
-                ),
-              ),
-                child: Padding(
-                    padding: EdgeInsets.all(10),
+                    //margin: EdgeInsets.symmetric(horizontal: 10),
+                    alignment: Alignment.centerRight,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Icon(
+                        Icons.delete,
+                        color: Colors.white
+                        ),
+                    ),
+                 ),
+                  child: Container(
+                    color: tapped.contains(index) ? Colors.green : Colors.white,
                     child: GestureDetector(
                       child: new Card(
                         color: tapped.contains(index) ? Colors.green : Colors.white,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                        //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
                         //margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                         //elevation: 5,
                         child: new Container(
+                          height: 60,
                           alignment: Alignment.center,
                           margin: new EdgeInsets.all(10),
                           child: Text(
                             deviceName[index],
                             style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold
                             ),
                           ),
                         ),
@@ -113,14 +118,16 @@ class _RoomPageState extends State<RoomPage>{
                       onTap: (){
                         setState(() {
                           if(tapped.contains(index)){
-                              tapped.remove(index);
+                            tapped.remove(index);
                           }else{
-                              tapped.add(index);
+                            tapped.add(index);
                           }
                         });
                       },
                     )
-                )
+                  ),
+                ),
+              ),
             );
           },
         )
@@ -168,14 +175,15 @@ class _RoomPageState extends State<RoomPage>{
             ),
           ],
           onTap: (val){
-            setState((){
+            setState(() {
               _currentIndex = val;
               if(_currentIndex == 0){
                 Navigator.pop(context);
+                setState(() {});
               }
-              if(_currentIndex == 1){
-                getDevice(context, "Add device").then((name){
-                  if(name!= null && name != ""){
+              if(_currentIndex == 1) {
+                getDevice(context, "Add device").then((name) {
+                  if (name != null && name != "") {
                     deviceName.add(name);
                     print(deviceName.length);
                     setState(() {});
@@ -183,9 +191,12 @@ class _RoomPageState extends State<RoomPage>{
                 });
               }
               if(_currentIndex == 3){
-                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>MyHomePage()),(Route<dynamic> route)=>false);
+                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                  builder: (context)=>MyHomePage()),(Route<dynamic> route)=>false);
+                setState(() {});
               }
             });
+
           }
       );
 
